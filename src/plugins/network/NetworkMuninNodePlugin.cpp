@@ -38,20 +38,17 @@ NetworkMuninNodePlugin::~NetworkMuninNodePlugin()
 int NetworkMuninNodePlugin::GetConfig(char *buffer, int len) {
   int ret = 0;
   strncpy(buffer, "graph_order down up\n"
-    "graph_title network traffic\n"
-    "graph_args --base 1000\n"
-    "graph_vlabel packets in (-) / out (+) per ${graph_period}\n"
+    "graph_title Network Interfaces traffic\n"
+    "graph_args --base 1000 --lower-limit 0\n"
+    "graph_vlabel bits in / out per ${graph_period}\n"
     "graph_category network\n"
     "graph_info This graph shows the traffic of the network interfaces. Please note that the traffic is shown in packets per second, not bytes.\n"
-    "down.label pps\n"
+    "down.label (IN)RX\n"
     "down.type COUNTER\n"
-    "down.graph no\n"
-    "up.label pps\n"
+    "down.draw LINE2\n"
+    "up.label (OUT)TX\n"
     "up.type COUNTER\n"
-    "up.negative down\n"
-    "up.info Traffic of the interfaces. Maximum speed is 54000000 packets per second.\n"
-    "up.max 54000000\n"
-    "down.max 54000000\n"
+    "up.draw AREA\n"
     ".\n", len);
   return 0;
 };
