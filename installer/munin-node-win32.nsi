@@ -7,8 +7,8 @@
 !include "FileFunc.nsh"
 
 ; The name of the installer
-!define VERSION 1.6.1.0
-Name "Munin Node for Windows ${VERSION} (Beta)"
+!define VERSION 1.6.1.5
+Name "Munin Node for Windows ${VERSION}"
 
 ; The file to write
 OutFile "munin-node-win32-${VERSION}-installer.exe"
@@ -24,13 +24,13 @@ InstallDirRegKey HKLM "Software\Munin Node for Windows" "Install_Dir"
 RequestExecutionLevel admin
 
 VIProductVersion "${VERSION}"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "Munin Node for Windows"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "NSIS Installer for Munin Node for Windows"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "Copyright (C) 2006-2011 Jory 'jcsston' Stone, modified by Adam Groszer"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "Munin Node for Windows"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "InternalName" "munin-node-win32"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${VERSION}"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" "${VERSION}"
+VIAddVersionKey "ProductName" "Munin Node for Windows"
+VIAddVersionKey "Comments" "NSIS Installer for Munin Node for Windows"
+VIAddVersionKey "LegalCopyright" "Copyright (C) 2006-2011 Jory 'jcsston' Stone, modified by Adam Groszer"
+VIAddVersionKey "FileDescription" "Munin Node for Windows"
+VIAddVersionKey "InternalName" "munin-node-win32"
+VIAddVersionKey "FileVersion" "${VERSION}"
+VIAddVersionKey "ProductVersion" "${VERSION}"
   
 ;--------------------------------
 
@@ -80,8 +80,9 @@ Section "Start Menu Shortcuts"
 
   CreateDirectory "$SMPROGRAMS\Munin Node for Windows"
   CreateShortCut "$SMPROGRAMS\Munin Node for Windows\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
-  CreateShortCut "$SMPROGRAMS\Munin Node for Windows\Run munin-node in foreground.lnk" "$INSTDIR\munin-node.exe" "-run" "$INSTDIR\munin-node.exe" 0
-  
+  CreateShortCut "$SMPROGRAMS\Munin Node for Windows\Run munin-node.lnk" "$INSTDIR\munin-node.exe" "-run" "$INSTDIR\munin-node.exe" 0
+  CreateShortCut "$SMPROGRAMS\Munin Node for Windows\Install Service munin-node.lnk" "$INSTDIR\munin-node.exe" "-install" "$INSTDIR\munin-node.exe" 0
+  CreateShortCut "$SMPROGRAMS\Munin Node for Windows\Unnstall Service munin-node.lnk" "$INSTDIR\munin-node.exe" "-uninstall" "$INSTDIR\munin-node.exe" 0
 SectionEnd
 
 ; Add firewall rule
